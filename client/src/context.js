@@ -7,8 +7,12 @@ const reducer = (prevState,action)=>{
         case "TOGGLE":
         return{todos: prevState.todos.map(t => { if (t.id === action.payload) {t.complete = 
              !t.complete}; return t  }) }
+
+        case "REMOVE":
+            return { todos: prevState.todos.filter(todo => todo.id !== action.payload) }
+
     default:
-    return prevState
+     return prevState
     }
 
 }
