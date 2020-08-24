@@ -17,6 +17,8 @@ export default class Addtodo extends Component {
         e.preventDefault()
         const newTodo = this.state
         dispatch({type:"ADD", payload:newTodo})
+        this.setState({title: ""})
+
     }
     render() {
         return (
@@ -24,7 +26,7 @@ export default class Addtodo extends Component {
             const {dispatch} = value 
             return  <form onSubmit={this.add.bind(this, dispatch)}>
             <input type="text" className="form-control rounded-0" placeholder="write your todo here
-            ... " onChange={this.update} value={this.state.value}/>
+            ... " onChange={this.update} value={this.state.title}/>
             <button className="form-control rounded-0 btn-secondary" type="submit"> Add todo</button>
         </form>
         }}</Consumer>
