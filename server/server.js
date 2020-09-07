@@ -47,7 +47,9 @@ app.post("/todos", (req, res) => {
   newTodo.save().then(todo => res.json(todo))
 })
 
-
+app.delete("/todos/:id", (req, res) => {
+  Todo.findByIdAndDelete(req.params.id).then(()=>res.json({remove:true}))
+})
 
 
 

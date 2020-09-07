@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from "axios";
 import { Consumer } from '../context'
 
 export default class Todo extends Component {
@@ -10,19 +11,21 @@ export default class Todo extends Component {
         dispatch({type: "TOGGLE" , payload:id })
     }
     remove = (id, dispatch) => {
-        dispatch({type: "REMOVE" , payload:id })
+        axios.delete(`/todos/${id}`)
+        .then(()=> dispatch({type: "REMOVE" , payload:id }))
+       
     }
     render(){ 
-        const { title , id } = this.props.todo
+        const { title , _id} = this.props.todo
         return (
              <Consumer>{value=>{
                  const {dispatch} = value 
                 return <h3 className="text-dark text-center p-1 bg-light border-bottom" style=
                 {this.style()}>
                     <i className="far fa-times-circle fa-sm float-left m-1 text-danger" onClick=
-                    {this.remove.bind(this, id, dispatch)} ></i>{title}
+                    {this.remove.bind(this, _id, dispatch)} ></i>{title}
                     <input type="checkbox" className="m-2 float-right" onChange={this.toggle.bind(this, 
-                        id, dispatch)} />
+                        _id, dispatch)} />
                 </h3>
                 }}</Consumer>
         )
